@@ -1,6 +1,6 @@
 name: hello world
 
-on: [workflow_dispatch]
+on: [push]
 
 jobs:
   hello_world:
@@ -10,5 +10,17 @@ jobs:
       - name: Clonar el repositorio
         uses: actions/checkout@v3
 
-      - name: Ejecutar script Python
-        run: python3 main.py
+      - name: Crear clave ssh
+        env:
+          ssh_key: $ {{ secrets.SSH_KEY}}
+
+          
+        run: |
+          echo "$ssh_key" > key.pem
+          chmod 600 key.pem
+
+      - name: Listar archivos
+        run: ls -la
+
+      - name: Ver contenido de la clave
+        run: cat key.pem
