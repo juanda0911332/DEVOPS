@@ -1,0 +1,14 @@
+name = hello world
+on [workflow_dispatch]
+
+jobs:
+  hello world:
+    runs-on: ubuntu-latest
+    steps:
+    - run: ls -ls
+
+    - name: Clonar el repositorio
+      uses: actions/checkout/checkout@v3
+
+    - run: ls -ls
+    - run: python main.py
